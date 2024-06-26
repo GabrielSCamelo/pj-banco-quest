@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Aluno";
+
+}
+<div ng-controller="AlunoController">
+    <div class="card-deck">
+        <div class="row">
+
+            <!-- Card Adicionar Novo Aluno (Opcional, dependendo da lógica da aplicação) -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Adicionar Novo Aluno</h2>
+                    <form ng-submit="criarAluno()">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" class="form-control" ng-model="novoAluno.nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" ng-model="novoAluno.email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="matricula">Matrícula:</label>
+                            <input type="text" id="matricula" class="form-control" ng-model="novoAluno.matricula" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="senha" class="form-control" ng-model="novoProfessor.senha" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar Aluno</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Listar Todos os Alunos -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
+                                                                  <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Listar Todos os Alunos
+                    </h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" ng-if="alunos.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Nome:</th>
+                                    <th>Email:</th>
+                                    <th>Matrícula:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aluno in alunos" ng-click="getDetails(aluno.id)" ng-class="{ 'table-active': alunoSelecionado === aluno }">
+                                    <td>{{ aluno.nome }}</td>
+                                    <td>{{ aluno.email }}</td>
+                                    <td>{{ aluno.matricula }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p ng-if="alunos.length === 0">Nenhum aluno cadastrado.</p>
+                </div>
+            </div>
+
+            <!-- Card Detalhes do Aluno Selecionado -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Detalhes do Aluno</h2>
+                    <div ng-if="aluno.id">
+                        <label>Nome:</label> {{aluno.nome}}<br>
+                        <label>Email:</label> {{aluno.email}}<br>
+                        <label>Matrícula:</label> {{aluno.matricula}}<br>
+                    </div>
+                    <div ng-if="!aluno.id">
+                        <p>Selecione um aluno para ver os detalhes.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

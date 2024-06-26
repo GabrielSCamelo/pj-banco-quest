@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Turma";
+
+}
+<div ng-controller="TurmaController">
+    <div class="card-deck">
+        <div class="row">
+
+            <!-- Card Adicionar Nova Turma -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Adicionar Nova Turma</h2>
+                    <form ng-submit="criarTurma()">
+                        <div class="form-group">
+                            <label for="disciplina">Disciplina:</label>
+                            <input type="text" id="disciplina" class="form-control" ng-model="novaTurma.disciplinaId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="periodo">Período:</label>
+                            <input type="text" id="periodo" class="form-control" ng-model="novaTurma.periodo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="professor">Professor:</label>
+                            <select id="professor" class="form-control" ng-model="novaTurma.professorId" required>
+                                <option ng-repeat="prof in professores" value="{{ prof.id }}">{{ prof.nome }}</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar Turma</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Listar Todas as Turmas -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Listar Todas as Turmas</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" ng-if="turmas.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Disciplina:</th>
+                                    <th>Período:</th>
+                                    <th>Professor:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="turma in turmas" ng-click="getDetails(turma.id)" ng-class="{ 'table-active': turmaSelecionada === turma }">
+                                    <td>{{ turma.disciplina.nome }}</td>
+                                    <td>{{ turma.periodo }}</td>
+                                    <td>{{ turma.professor.nome }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p ng-if="turmas.length === 0">Nenhuma turma cadastrada.</p>
+                </div>
+            </div>
+
+                <!-- Card Detalhes da Turma Selecionada -->
+            <div class="card col-lg-4" ng-if="turmas.length > 0">
+                <div class="card-body">
+                    <h2 class="card-title">Detalhes da Turma</h2>
+                    <div ng-if="turma.id">
+                        <label>ID:</label> {{turma.id}}<br>
+                        <label>Disciplina:</label> {{turma.disciplina.nome}}<br>
+                        <label>Período:</label> {{turma.periodo}}<br>
+                        <label>Professor:</label> {{turma.professor.nome}}<br>
+                    </div>
+                    <div ng-if="!turma.id">
+                        <p>Selecione uma turma para ver os detalhes.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

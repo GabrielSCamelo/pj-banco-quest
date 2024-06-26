@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Disciplina";
+
+}
+<div ng-controller="DisciplinaController">
+    <div class="card-deck">
+        <div class="row">
+
+            <!-- Card Adicionar Nova Disciplina -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Adicionar Nova Disciplina</h2>
+                    <form ng-submit="criarDisciplina()">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" class="form-control" ng-model="novaDisciplina.nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <input type="text" id="descricao" class="form-control" ng-model="novaDisciplina.descricao" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Criar Disciplina</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Listar Todas as Disciplinas -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
+                                                                  <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Listar Todas as Disciplinas
+                    </h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" ng-if="professores.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Nome:</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="disciplina in disciplinas" ng-click="getDetails(disciplina.id)" ng-class="{ 'table-active': disciplinaSelecionada === disciplina }">
+                                    <td>{{ {{disciplina.nome}} }}</td>
+                                    <td>{{ disciplina.sigla }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p ng-if="disciplinas.length === 0">Nenhuma disciplina cadastrada.</p>
+                </div>
+            </div>
+
+            <!-- Card Detalhes da Disciplina -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Detalhes da Disciplina</h2>
+                    <div ng-if="disciplina.id">
+                        <label>Nome:</label> {{disciplina.nome}}<br>
+                        <label>Descrição:</label> {{disciplina.sigla}}<br>
+                    </div>
+                    <div ng-if="!disciplina.id">
+                        <p>Selecione uma disciplina para ver os detalhes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

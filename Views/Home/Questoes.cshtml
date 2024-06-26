@@ -1,0 +1,128 @@
+﻿@{
+    ViewData["Title"] = "Questao";
+
+}
+<div ng-controller="QuestaoController">
+    <div class="card-deck">
+        <div class="row">
+
+            <!-- Card Criar Nova Questão -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Criar Nova Questão</h2>
+                    <form ng-submit="adicionarQuestaoTemp()">
+                        <div class="form-group">
+                            <label for="titulo">Título:</label>
+                            <input type="text" id="titulo" class="form-control" ng-model="questao.titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="enunciado">Enunciado:</label>
+                            <textarea id="enunciado" class="form-control" ng-model="questao.enunciado" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoA">Opção A:</label>
+                            <input type="text" id="opcaoA" class="form-control" ng-model="questao.opcaoA" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoB">Opção B:</label>
+                            <input type="text" id="opcaoB" class="form-control" ng-model="questao.opcaoB" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoC">Opção C:</label>
+                            <input type="text" id="opcaoC" class="form-control" ng-model="questao.opcaoC" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoD">Opção D:</label>
+                            <input type="text" id="opcaoD" class="form-control" ng-model="questao.opcaoD" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoE">Opção E:</label>
+                            <input type="text" id="opcaoE" class="form-control" ng-model="questao.opcaoE" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoCorretaIndex">Resposta:</label>
+                            <input type="text" id="opcaoCorretaIndex" class="form-control" ng-model="questao.opcaoCorretaIndex" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Adicionar Questão</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Listar Questões -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
+                                                                  <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Lista de Questões
+                    </h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm" ng-if="questoes.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="questao in questoes" ng-click="selecionarQuestao(questao)" ng-class="{ 'table-active': questaoSelecionada.titulo === questao.titulo }">
+                                    <td>{{ questao.titulo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p ng-if="questoes.length === 0">Nenhuma questão adicionada.</p>
+                </div>
+            </div>
+
+            <!-- Card Detalhes da Questão Selecionada -->
+            <div class="card col-lg-4" ng-if="questaoSelecionada">
+                <div class="card-body">
+                    <h2 class="card-title">Detalhes da Questão</h2>
+                    <form ng-submit="atualizarQuestao()">
+                        <div class="form-group">
+                            <label for="tituloEdit">Título:</label>
+                            <input type="text" id="tituloEdit" class="form-control" ng-model="questaoSelecionada.titulo" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="enunciadoEdit">Enunciado:</label>
+                            <textarea id="enunciadoEdit" class="form-control" ng-model="questaoSelecionada.enunciado" ng-disabled="!isEditing" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoAEdit">Opção A:</label>
+                            <input type="text" id="opcaoAEdit" class="form-control" ng-model="questaoSelecionada.opcaoA" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoBEdit">Opção B:</label>
+                            <input type="text" id="opcaoBEdit" class="form-control" ng-model="questaoSelecionada.opcaoB" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoCEdit">Opção C:</label>
+                            <input type="text" id="opcaoCEdit" class="form-control" ng-model="questaoSelecionada.opcaoC" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoDEdit">Opção D:</label>
+                            <input type="text" id="opcaoDEdit" class="form-control" ng-model="questaoSelecionada.opcaoD" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoEEdit">Opção E:</label>
+                            <input type="text" id="opcaoEEdit" class="form-control" ng-model="questaoSelecionada.opcaoE" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="opcaoCorretaIndexEdit">Resposta:</label>
+                            <input type="text" id="opcaoCorretaIndexEdit" class="form-control" ng-model="questaoSelecionada.opcaoCorretaIndex" ng-disabled="!isEditing" required>
+                        </div>
+                        <div class="form-group" ng-if="isEditing">
+                            <button type="submit" class="btn btn-success">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" ng-click="cancelarEdicao()">Cancelar</button>
+                        </div>
+                        <div class="form-group" ng-if="!isEditing">
+                            <button type="button" class="btn btn-primary" ng-click="iniciarEdicao()">Editar</button>
+                            <button type="button" class="btn btn-danger" ng-click="excluirQuestao()">Excluir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

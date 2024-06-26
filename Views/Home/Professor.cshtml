@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Professor";
+
+}
+<div ng-controller="ProfessorController">
+    <div class="card-deck">
+        <div class="row">
+
+            <!-- Card Criar Novo Professor -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h2 class="card-title">Criar Novo Professor</h2>
+                    <form ng-submit="criarProfessor()">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" class="form-control" ng-model="novoProfessor.nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" ng-model="novoProfessor.email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="idFuncional">ID Funcional:</label>
+                            <input type="text" id="idFuncional" class="form-control" ng-model="novoProfessor.idFuncional" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="senha" class="form-control" ng-model="novoProfessor.senha" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Criar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Listar Professores -->
+            <div class="card col-lg-4">
+                <div class="card-body">
+                    <h1 class="card-title">
+                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
+                                                                    <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Lista de QuestõesProfessores
+                    </h1>
+                    <div class="table-responsive">
+                        <table class="table table-striped" ng-if="professores.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="professor in professores" ng-click="detalhesProfessor(professor.id)" ng-class="{ 'table-active': professorSelecionada === professor }">
+                                    <td>{{ professor.nome }}</td>
+                                    <td>{{ professor.email }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p ng-if="professores.length === 0">Nenhum professor encontrado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Detalhes do Professor -->
+            <div class="card col-lg-4" ng-if="professorSelecionado">
+                <div class="card-body">
+                    <h2 class="card-title">Detalhes do Professor</h2>
+                    <p>ID: {{ professorSelecionado.id }}</p>
+                    <p>Nome: {{ professorSelecionado.nome }}</p>
+                    <p>Email: {{ professorSelecionado.email }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
