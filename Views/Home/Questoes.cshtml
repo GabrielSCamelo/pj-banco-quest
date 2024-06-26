@@ -2,14 +2,15 @@
     ViewData["Title"] = "Questao";
 
 }
-<div ng-controller="QuestaoController">
-    <div class="card-deck">
-        <div class="row">
-
-            <!-- Card Criar Nova Questão -->
-            <div class="card col-lg-4">
+<div class="container-fluid" ng-controller="QuestaoController">
+    <div class="row justify-content-center">
+        <!-- Card Criar Nova Questão -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Criar Nova Questão</h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">Criar Nova Questão</h2>
                     <form ng-submit="adicionarQuestaoTemp()">
                         <div class="form-group">
                             <label for="titulo">Título:</label>
@@ -43,18 +44,21 @@
                             <label for="opcaoCorretaIndex">Resposta:</label>
                             <input type="text" id="opcaoCorretaIndex" class="form-control" ng-model="questao.opcaoCorretaIndex" required>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Adicionar Questão</button>
+                        <button type="submit" class="btn btn-primary mt-3">Adicionar Questão</button>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Card Listar Questões -->
-            <div class="card col-lg-4">
+        <!-- Card Listar Questões -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="<b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Lista de Questões
+                    </h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">
-                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
-                                                                  <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Lista de Questões
-                    </h2>
                     <div class="table-responsive">
                         <table class="table table-hover table-sm" ng-if="questoes.length > 0">
                             <thead>
@@ -72,11 +76,15 @@
                     <p ng-if="questoes.length === 0">Nenhuma questão adicionada.</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Card Detalhes da Questão Selecionada -->
-            <div class="card col-lg-4" ng-if="questaoSelecionada">
+        <!-- Card Detalhes da Questão Selecionada -->
+        <div class="col-lg-4 col-sm-12 mt-3" ng-if="questaoSelecionada">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detalhes da Questão</h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">Detalhes da Questão</h2>
                     <form ng-submit="atualizarQuestao()">
                         <div class="form-group">
                             <label for="tituloEdit">Título:</label>
@@ -111,18 +119,16 @@
                             <input type="text" id="opcaoCorretaIndexEdit" class="form-control" ng-model="questaoSelecionada.opcaoCorretaIndex" ng-disabled="!isEditing" required>
                         </div>
                         <div class="form-group" ng-if="isEditing">
-                            <button type="submit" class="btn btn-success">Confirmar</button>
-                            <button type="button" class="btn btn-secondary" ng-click="cancelarEdicao()">Cancelar</button>
+                            <button type="submit" class="btn btn-success mt-3">Confirmar</button>
+                            <button type="button" class="btn btn-secondary mt-3" ng-click="cancelarEdicao()">Cancelar</button>
                         </div>
                         <div class="form-group" ng-if="!isEditing">
-                            <button type="button" class="btn btn-primary" ng-click="iniciarEdicao()">Editar</button>
-                            <button type="button" class="btn btn-danger" ng-click="excluirQuestao()">Excluir</button>
+                            <button type="button" class="btn btn-primary mt-3" ng-click="iniciarEdicao()">Editar</button>
+                            <button type="button" class="btn btn-danger mt-3" ng-click="excluirQuestao()">Excluir</button>
                         </div>
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

@@ -2,12 +2,11 @@
     ViewData["Title"] = "AlunoTurma";
 
 }
-<div ng-controller="AlunoTurmaController">
-    <div class="card-deck">
-        <div class="row">
-
-            <!-- Card Seleção de Turma -->
-            <div class="card col-lg-4">
+<div class="container-fluid" ng-controller="AlunoTurmaController">
+    <div class="row justify-content-center">
+        <!-- Card Seleção de Turma -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Selecionar Turma</h2>
                     <form>
@@ -21,9 +20,11 @@
                     </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Card Lista de Alunos -->
-            <div class="card col-lg-4">
+        <!-- Card Lista de Alunos -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
                 <div class="card-body" style="max-height: 400px; overflow-y: auto;">
                     <h2 class="card-title">Lista de Alunos</h2>
                     <div class="table-responsive">
@@ -48,10 +49,10 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-success float-end" ng-click="associarAlunosTurma()">Adicionar Selecionados</button>
+                    <button class="btn btn-success float-end mt-3" ng-click="associarAlunosTurma()">Adicionar Selecionados</button>
                 </div>
             </div>
-
         </div>
+
     </div>
 </div>

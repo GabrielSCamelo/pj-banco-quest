@@ -2,14 +2,15 @@
     ViewData["Title"] = "Turma";
 
 }
-<div ng-controller="TurmaController">
-    <div class="card-deck">
-        <div class="row">
-
-            <!-- Card Adicionar Nova Turma -->
-            <div class="card col-lg-4">
+<div class="container-fluid" ng-controller="TurmaController">
+    <div class="row justify-content-center">
+        <!-- Card Adicionar Nova Turma -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Adicionar Nova Turma</h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">Adicionar Nova Turma</h2>
                     <form ng-submit="criarTurma()">
                         <div class="form-group">
                             <label for="disciplina">Disciplina:</label>
@@ -25,15 +26,19 @@
                                 <option ng-repeat="prof in professores" value="{{ prof.id }}">{{ prof.nome }}</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Adicionar Turma</button>
+                        <button type="submit" class="btn btn-primary mt-3">Adicionar Turma</button>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Card Listar Todas as Turmas -->
-            <div class="card col-lg-4">
+        <!-- Card Listar Todas as Turmas -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Listar Todas as Turmas</h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">Listar Todas as Turmas</h2>
                     <div class="table-responsive">
                         <table class="table table-striped" ng-if="turmas.length > 0">
                             <thead>
@@ -55,11 +60,15 @@
                     <p ng-if="turmas.length === 0">Nenhuma turma cadastrada.</p>
                 </div>
             </div>
+        </div>
 
-                <!-- Card Detalhes da Turma Selecionada -->
-            <div class="card col-lg-4" ng-if="turmas.length > 0">
+        <!-- Card Detalhes da Turma Selecionada -->
+        <div class="col-lg-4 col-sm-12 mt-3" ng-if="turmas.length > 0">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detalhes da Turma</h3>
+                </div>
                 <div class="card-body">
-                    <h2 class="card-title">Detalhes da Turma</h2>
                     <div ng-if="turma.id">
                         <label>ID:</label> {{turma.id}}<br>
                         <label>Disciplina:</label> {{turma.disciplina.nome}}<br>
@@ -71,7 +80,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

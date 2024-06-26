@@ -2,12 +2,11 @@
     ViewData["Title"] = "Professor";
 
 }
-<div ng-controller="ProfessorController">
-    <div class="card-deck">
-        <div class="row">
-
-            <!-- Card Criar Novo Professor -->
-            <div class="card col-lg-4">
+<div class="container-fluid" ng-controller="ProfessorController">
+    <div class="row justify-content-center">
+        <!-- Card Criar Novo Professor -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Criar Novo Professor</h2>
                     <form ng-submit="criarProfessor()">
@@ -27,18 +26,19 @@
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" class="form-control" ng-model="novoProfessor.senha" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Criar</button>
+                        <button type="submit" class="btn btn-primary mt-3">Criar</button>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Card Listar Professores -->
-            <div class="card col-lg-4">
+        <!-- Card Listar Professores -->
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">
-                        <i class="bi bi-question-circle h5" data-bs-toggle="tooltip" data-bs-html="true" title="
-                                                                    <b><i>Selecione um Item na Lista Para Visualizar Os Detalhes</i></b><br>"></i>Lista de QuestõesProfessores
-                    </h1>
+                    <h2 class="card-title">
+                        <i class="bi bi-person h5"></i> Lista de Professores
+                    </h2>
                     <div class="table-responsive">
                         <table class="table table-striped" ng-if="professores.length > 0">
                             <thead>
@@ -49,7 +49,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="professor in professores" ng-click="detalhesProfessor(professor.id)" ng-class="{ 'table-active': professorSelecionada === professor }">
+                                <tr ng-repeat="professor in professores" ng-click="detalhesProfessor(professor.id)" ng-class="{ 'table-active': professorSelecionado === professor }">
                                     <td>{{ professor.nome }}</td>
                                     <td>{{ professor.email }}</td>
                                 </tr>
@@ -59,17 +59,17 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Card Detalhes do Professor -->
-            <div class="card col-lg-4" ng-if="professorSelecionado">
-                <div class="card-body">
-                    <h2 class="card-title">Detalhes do Professor</h2>
-                    <p>ID: {{ professorSelecionado.id }}</p>
-                    <p>Nome: {{ professorSelecionado.nome }}</p>
-                    <p>Email: {{ professorSelecionado.email }}</p>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Card Detalhes do Professor -->
+        <div class="card col-lg-4 col-sm-12 mt-3" ng-if="professorSelecionado">
+            <div class="card-body">
+                <h2 class="card-title">Detalhes do Professor</h2>
+                <p>ID: {{ professorSelecionado.id }}</p>
+                <p>Nome: {{ professorSelecionado.nome }}</p>
+                <p>Email: {{ professorSelecionado.email }}</p>
+            </div>
+        </div>
+
     </div>
 </div>
